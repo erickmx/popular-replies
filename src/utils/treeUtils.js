@@ -31,7 +31,6 @@ const getMaxValue = leafs => {
  */
 const findMaxSum = node => {
   if (isLeaf(node)) {
-    console.log(node.data.me2, node.data.replies, node.maxValue);
     return node.data.replies;
   }
 
@@ -39,8 +38,8 @@ const findMaxSum = node => {
   let max = 0;
   let sum = 0;
   for (let idx = 0; idx < arrLenght; idx++) {
-    max = Math.max(max, findMaxSum(node.sons[idx]));
-    sum += max;
+    max = findMaxSum(node.sons[idx]);
+    sum = Math.max(sum, max + node.data.replies);
   }
 
   return sum;

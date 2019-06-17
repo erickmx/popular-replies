@@ -1,12 +1,20 @@
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faExternalLinkAlt,
+  faBullhorn,
+  faReply,
+  faHeart,
+  faUser
+} from "@fortawesome/free-solid-svg-icons";
 import { string, number, func } from "prop-types";
 import "./ListItem.css";
 
 const ListItem = ({
   me2,
-  text,
   url,
   wid,
+  text,
   onClick,
   replies,
   maxValue,
@@ -15,11 +23,47 @@ const ListItem = ({
 }) => (
   <li
     className="list-item__container"
-    style={{ marginLeft: `${10 * subIndent}px` }}
+    style={{
+      marginLeft: `${10 * subIndent}px`
+    }}
     key={wid}
     onClick={() => onClick(rootIndex, wid)}
   >
-    {me2} | {replies} | {text} | {url} | {wid} | {maxValue}
+    <div className="list-item__user">
+      <FontAwesomeIcon icon={faUser} /> {me2}
+    </div>
+    <div className="list-item__text">
+      {text}{" "}
+      <a href={url}>
+        <FontAwesomeIcon icon={faExternalLinkAlt} />
+      </a>
+    </div>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        flex: 1,
+        marginLeft: "5px",
+        marginBottom: "5px"
+      }}
+    >
+      <div className="padding-5">
+        <FontAwesomeIcon icon={faReply} />
+        {replies}
+      </div>
+      {wid && (
+        <div className="padding-5" style={{ marginLeft: "10px" }}>
+          <FontAwesomeIcon icon={faBullhorn} /> {wid}
+        </div>
+      )}
+      <div className="padding-5">
+        <FontAwesomeIcon
+          style={{ color: "#d30000", marginLeft: "10px" }}
+          icon={faHeart}
+        />{" "}
+        {maxValue}
+      </div>
+    </div>
   </li>
 );
 

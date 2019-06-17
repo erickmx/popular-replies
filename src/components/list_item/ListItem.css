@@ -1,7 +1,25 @@
+.pading-5 {
+  padding: 5px;
+}
+
 .list-item__container {
   background: white;
-  border: solid 1px red;
+  border: solid 1px #c3c3c3;
   width: 100%;
   box-shadow: 3px 3px rgba(0, 0, 0, 0.5);
   display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.list-item__text {
+  width: 100%;
+  flex: 2;
+  padding: 5px;
+}
+
+.list-item__user {
+  flex: 1;
+  margin-left: 5px;
+  margin-top: 5px;
 }

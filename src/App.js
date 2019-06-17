@@ -82,33 +82,38 @@ class App extends Component {
   render() {
     const { listPopulars } = this.state;
     return (
-      <ul>
-        {listPopulars.map((whisper, idx) => {
-          return (
-            <>
-              <ListItem
-                key={whisper.data.wid}
-                me2={whisper.data.me2}
-                replies={whisper.data.replies}
-                text={whisper.data.text}
-                url={whisper.data.url}
-                // wid={whisper.data.wid}
-                onClick={this.handleClickPopulars}
-                rootIndex={idx}
-                maxValue={whisper.maxValue || whisper.data.replies}
-              />
-              {whisper.sons.length > 0 && (
-                <ListReplies
-                  indent={1}
-                  replies={whisper.sons}
+      <>
+        <h1 style={{ fontSize: "1.5rem", color: "#3e3e3e", marginLeft: "5%" }}>
+          Popular Replies
+        </h1>
+        <ul>
+          {listPopulars.map((whisper, idx) => {
+            return (
+              <>
+                <ListItem
+                  key={whisper.data.wid}
+                  me2={whisper.data.me2}
+                  replies={whisper.data.replies}
+                  text={whisper.data.text}
+                  url={whisper.data.url}
+                  // wid={whisper.data.wid}
+                  onClick={this.handleClickPopulars}
                   rootIndex={idx}
-                  handleClickReplies={this.handleClickReplies}
+                  maxValue={whisper.maxValue || whisper.data.replies}
                 />
-              )}
-            </>
-          );
-        })}
-      </ul>
+                {whisper.sons.length > 0 && (
+                  <ListReplies
+                    indent={1}
+                    replies={whisper.sons}
+                    rootIndex={idx}
+                    handleClickReplies={this.handleClickReplies}
+                  />
+                )}
+              </>
+            );
+          })}
+        </ul>
+      </>
     );
   }
 }

@@ -11,7 +11,7 @@ class App extends Component {
   };
 
   componentDidMount() {
-    fetchPopular({ limit: 3 })
+    fetchPopular({ limit: 10 })
       .then(result => {
         const listPopulars = result.popular.map(mapData);
         this.setState({ listPopulars });

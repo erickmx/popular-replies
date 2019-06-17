@@ -6,7 +6,7 @@ class ListReplies extends Component {
   render() {
     const { replies, indent, rootIndex, handleClickReplies } = this.props;
     return (
-      <div style={{ overflow: "auto" }}>
+      <div>
         {replies.map(reply => {
           return (
             <>

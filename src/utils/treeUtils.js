@@ -5,7 +5,7 @@
  * sons: Array | null
  * }} node
  */
-const isLeaf = node => {
+export const isLeaf = node => {
   return node.sons.length === 0;
 };
 
@@ -17,7 +17,7 @@ const isLeaf = node => {
  * sons: Array | null
  * }>} leafs
  */
-const getMaxValue = leafs => {
+export const getMaxValue = leafs => {
   return leafs.reduce((max, curr) => Math.max(max, curr.data.replies), 0);
 };
 
@@ -29,7 +29,7 @@ const getMaxValue = leafs => {
  * sons: Array
  * }} node
  */
-const findMaxSum = node => {
+export const findMaxSum = node => {
   if (isLeaf(node)) {
     return node.data.replies;
   }
@@ -42,7 +42,27 @@ const findMaxSum = node => {
     sum = Math.max(sum, max + node.data.replies);
   }
 
+  setMaxValue(node, sum);
   return sum;
+};
+
+export const findNode = (node, wid, action) => {
+  if (isLeaf(node) && node.data.wid !== wid) {
+    return null;
+  }
+
+  if (node.data.wid === wid) {
+    action(node);
+    return node;
+  }
+
+  const arrLenght = node.sons.length;
+  for (let idx = 0; idx < arrLenght; idx++) {
+    const finded = findNode(node.sons[idx], wid, action);
+    if (finded) {
+      break;
+    }
+  }
 };
 
 /**
@@ -53,10 +73,11 @@ const findMaxSum = node => {
  * sons: Array
  * }} node
  */
-const setMaxValue = (node, maxValue) => {
+export const setMaxValue = (node, maxValue) => {
   node.maxValue = maxValue;
 };
 
+/*
 const mockData = {
   data: { me2: 1, replies: 10, text: "Algo", url: "URL", wid: "idRaro" },
   maxValue: 0,
@@ -233,7 +254,7 @@ const mockData = {
                     replies: 2,
                     text: "Algo",
                     url: "URL",
-                    wid: "idRaro"
+                    wid: "wid400000"
                   },
                   maxValue: 0,
                   sons: []
@@ -261,3 +282,22 @@ const mockData = {
 console.log("====================================");
 console.log(findMaxSum(mockData));
 console.log("====================================");
+console.log("====================================");
+console.log(
+  findNode(mockData, "wid400000", node => {
+    node.data.text = "Me Encontraron";
+    console.log("FINDED", node);
+  })
+);
+console.log("====================================");
+console.log("====================================");
+console.log(
+  findNode(mockData, "wid400000", node => {
+    console.log("FINDED_2", node);
+  })
+);
+console.log("====================================");
+console.log("====================================");
+console.log(mockData);
+console.log("====================================");
+*/
